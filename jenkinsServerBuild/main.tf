@@ -18,7 +18,7 @@ resource "azurerm_network_interface" "jenkinsServerNIC_ID" {
     name                          = "JenkinsIPConfig"
     subnet_id                     = var.subnetID
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = "${azurerm_network_interface.jenkinsServerPublicIP.id}"
+    public_ip_address_id          = "${azurerm_public_ip.jenkinsServerPublicIP.id}"
   }
 }
 resource "azurerm_virtual_machine" "jenkinsServerVM" {
