@@ -1,0 +1,3 @@
+variable "subnetID" {
+    type = string
+}
