@@ -15,6 +15,18 @@
         "description": "Password for the Virtual Machine."
       }
     },
+    "newVMName": {
+      "type": "string",
+      "metadata": {
+        "description": "Virtual Machine name."
+      }
+    },
+    "labName": {
+      "type": "string",
+      "metadata": {
+        "description": "Lab name."
+      }
+    },
     "dnsNameForPublicIP": {
       "type": "string",
       "minLength": 1,
@@ -45,14 +57,13 @@
     "vhdStorageType": "Standard_LRS",
     "publicIPAddressType": "Dynamic",
     "vhdStorageContainerName": "vhds",
-    "vmName": "MyUbuntuVM",
     "vmSize": "Standard_D2_v2",
     "virtualNetworkName": "MyVNET",
     "vnetId": "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
     "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]",
     "vhdStorageAccountName": "[concat('vhdstorage', uniqueString(resourceGroup().id))]",
     "diagnosticsStorageAccountName": "[variables('vhdStorageAccountName')]",
-    "ladMetricsResourceId": "[resourceId('Microsoft.Compute/virtualMachines', variables('vmName'))]"
+    "ladMetricsResourceId": "[resourceId('Microsoft.Compute/virtualMachines', parameters('newvmName'))]"
   },
   "resources": [
     {
@@ -139,7 +150,7 @@
     {
       "apiVersion": "2015-06-15",
       "type": "Microsoft.Compute/virtualMachines",
-      "name": "[variables('vmName')]",
+      "name": "[parameters('newvmName')]",
       "location": "[resourceGroup().location]",
       "tags": {
         "displayName": "VirtualMachine"
@@ -153,7 +164,7 @@
           "vmSize": "[variables('vmSize')]"
         },
         "osProfile": {
-          "computerName": "[variables('vmName')]",
+          "computerName": "[parameters('newvmName')]",
           "adminUsername": "[parameters('adminUsername')]",
           "adminPassword": "[parameters('adminPassword')]"
         },
@@ -191,7 +202,7 @@
             "displayName": "AzureDiagnostics"
           },
           "dependsOn": [
-            "[resourceId('Microsoft.Compute/virtualMachines', variables('vmName'))]"
+            "[resourceId('Microsoft.Compute/virtualMachines', parameters('newvmName'))]"
           ],
           "properties": {
             "publisher": "Microsoft.OSTCExtensions",
