@@ -20,6 +20,7 @@
       "metadata": {
         "description": "Virtual Machine name."
       }
+    },
     "labName": {
       "type": "string",
       "metadata": {
