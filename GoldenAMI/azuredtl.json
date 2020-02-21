@@ -51,6 +51,12 @@
         "description": "The size of the new vm to be created."
       }
     },
+    "labName": {
+      "type": "string",
+      "metadata": {
+        "description": "Lab name."
+      }
+    },
     "userName": {
       "type": "string",
       "metadata": {
