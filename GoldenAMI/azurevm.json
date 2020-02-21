@@ -20,10 +20,10 @@
       "metadata": {
         "description": "Virtual Machine name."
       }
-     "labName": {
+    "labName": {
       "type": "string",
       "metadata": {
-        "description": "Virtual Machine name."
+        "description": "Lab name."
       }
     },
     "dnsNameForPublicIP": {
