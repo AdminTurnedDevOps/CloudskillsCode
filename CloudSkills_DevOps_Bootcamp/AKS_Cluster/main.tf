@@ -12,9 +12,7 @@ provider azurerm {
   features {}
 }
 
-module "env" {
-  source = "./TFSTATE_Storage_Account"
-}
+## KeyVault task here to pull client id and client secret
 
 resource "azurerm_kubernetes_cluster" "CloudSkillsAKS" {
   name                = "cloudskillsaks"
@@ -27,6 +25,14 @@ resource "azurerm_kubernetes_cluster" "CloudSkillsAKS" {
     node_count = 1
     vm_size = "Standard_D2_v2"
   }
+  service_principal {
+    client_id     = 
+    client_secret = 
+  }
 
+  tags = {
+    Environment = "Production"
+  }
+}
   
 }
