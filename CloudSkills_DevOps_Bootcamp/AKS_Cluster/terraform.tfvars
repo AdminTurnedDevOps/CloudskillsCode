@@ -1,4 +1,4 @@
-name = "Cloudskills-aks01"
+Name = "Cloudskills-aks01"
 resourceGroup = "Dev10"
 location = "useast2"
 storageAccountName = "cloudskillstfstate"

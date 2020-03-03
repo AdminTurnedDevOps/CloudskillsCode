@@ -1,8 +1,8 @@
 terraform {
   backend "azurerm" {
-    resource_group_name = var.resourceGroup
-    storage_account_name = var.storageAccountName
-    container_name = var.containerName
+    resource_group_name = "Dev10"
+    storage_account_name = "cloudskillstfstate"
+    container_name = "tfstate"
     key = "terraform.state"
   }
 }
@@ -31,10 +31,10 @@ output "ClientSecret" {
 }
 
 resource "azurerm_kubernetes_cluster" "CloudSkillsAKS" {
-  name                = "cloudskillsaks"
+  name                = var.Name
   location            = var.location
   resource_group_name = var.resourceGroup
-  dns_prefix          = concat([azurerm_kubernetes_cluster.CloudSkillsAKS.name, "-prefix"])
+  dns_prefix          = "cloudskillsprefix"
 
   default_node_pool {
     name = "default"
@@ -42,8 +42,8 @@ resource "azurerm_kubernetes_cluster" "CloudSkillsAKS" {
     vm_size = "Standard_D2_v2"
   }
   service_principal {
-    client_id     = output.ClientID
-    client_secret = output.ClientSecret
+    client_id     = "${data.azurerm_key_vault_secret.keyVaultClientID.value}"
+    client_secret = "${data.azurerm_key_vault_secret.keyVaultClientSecret.value}"
   }
 
   tags = {
