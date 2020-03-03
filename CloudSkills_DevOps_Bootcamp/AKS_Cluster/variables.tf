@@ -17,3 +17,8 @@ variable "containerName" {
     type = string
     description = "Container name"
 }
+
+variable "keyvaultID" {
+    type = string
+    description = "KeyVault ID"
+}

@@ -12,7 +12,23 @@ provider azurerm {
   features {}
 }
 
-## KeyVault task here to pull client id and client secret
+data "azurerm_key_vault_secret" "keyVaultClientID" {
+  name         = "AKSClientID"
+  key_vault_id = var.keyvaultID
+}
+
+data "azurerm_key_vault_secret" "keyVaultClientSecret" {
+  name         = "AKSClientSecret"
+  key_vault_id = var.keyvaultID
+}
+
+output "ClientID" {
+  value = "${data.azurerm_key_vault_secret.keyVaultClientID.value}"
+}
+
+output "ClientSecret" {
+  value = "${data.azurerm_key_vault_secret.keyVaultClientSecret.value}"
+}
 
 resource "azurerm_kubernetes_cluster" "CloudSkillsAKS" {
   name                = "cloudskillsaks"
@@ -26,8 +42,8 @@ resource "azurerm_kubernetes_cluster" "CloudSkillsAKS" {
     vm_size = "Standard_D2_v2"
   }
   service_principal {
-    client_id     = 
-    client_secret = 
+    client_id     = output.ClientID
+    client_secret = output.ClientSecret
   }
 
   tags = {
