@@ -1,7 +1,0 @@
-1. Install the Azure CLI: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest
-2. From your terminal run `az login`. A web browser will show. Type in your email and password that you use to log into your Azure portal.
-3. If successful you will see a screen that says "You have logged into Azure successfully".
-4. Your terminal that you ran `az login` from will show your subscription.
-
-If you need to set a specific subscription, run the following:
-az account set --subscription="SUBSCRIPTION_ID"
