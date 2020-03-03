@@ -50,5 +50,3 @@ resource "azurerm_kubernetes_cluster" "CloudSkillsAKS" {
     Environment = "Development"
   }
 }
-  
-}
