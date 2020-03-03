@@ -31,7 +31,7 @@ resource "azurerm_kubernetes_cluster" "CloudSkillsAKS" {
   }
 
   tags = {
-    Environment = "Production"
+    Environment = "Development"
   }
 }
   

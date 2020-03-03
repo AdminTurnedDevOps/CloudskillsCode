@@ -6,5 +6,7 @@ function servicePrinicpalKeyvault {
         [string]$location = "eastus2"
     )
 
-    az keyvault create --location $location --name $name --resource-group $resourceGroup
+    $createKeyVault = az keyvault create --location $location --name $name --resource-group $resourceGroup
+    $createKeyVault
+    $createKeyVault.Id
 }
