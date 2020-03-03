@@ -22,3 +22,8 @@ variable "keyvaultID" {
     type = string
     description = "KeyVault ID"
 }
+
+variable "location" {
+    type = string
+    description = "Regio"
+}

@@ -32,8 +32,8 @@ output "ClientSecret" {
 
 resource "azurerm_kubernetes_cluster" "CloudSkillsAKS" {
   name                = "cloudskillsaks"
-  location            = "${module.env.location}"
-  resource_group_name = "${module.env.resourceGroup}"
+  location            = var.location
+  resource_group_name = var.resourceGroup
   dns_prefix          = concat([azurerm_kubernetes_cluster.CloudSkillsAKS.name, "-prefix"])
 
   default_node_pool {
