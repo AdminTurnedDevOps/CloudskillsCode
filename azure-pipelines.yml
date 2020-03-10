@@ -7,7 +7,7 @@ pool:
 steps:
   - task: CopyFiles@2
     inputs:
-      SourceFolder: 'AKS_Cluster'
+      SourceFolder: 'CloudSkills_DevOps_Bootcamp/AKS_Cluster'
       Contents: '**'
       TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
