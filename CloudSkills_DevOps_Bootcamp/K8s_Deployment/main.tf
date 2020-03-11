@@ -1,25 +1,31 @@
-resource "kubernetes_deployment" "webserver" {
+resource "kubernetes_deployment" "example" {
   metadata {
-    name = "webserver"
+    name = "terraform-example"
     labels = {
-      webserver = "cloudskillsnginx"
+      test = "MyExampleApp"
     }
   }
 
   spec {
-    replicas = 2
+    replicas = 3
+
+    selector {
+      match_labels = {
+        test = "MyExampleApp"
+      }
+    }
 
     template {
       metadata {
         labels = {
-          webserver = "cloudskillsnginx"
+          test = "MyExampleApp"
         }
       }
 
       spec {
         container {
           image = "nginx:latest"
-          name  = "cloudskillsnginx"
+          name  = "example"
 
           resources {
             limits {
@@ -30,6 +36,17 @@ resource "kubernetes_deployment" "webserver" {
               cpu    = "250m"
               memory = "50Mi"
             }
+          }
+
+          liveness_probe {
+            http_get {
+              path = "/nginx_status"
+              port = 80
+
+            }
+
+            initial_delay_seconds = 3
+            period_seconds        = 3
           }
         }
       }
