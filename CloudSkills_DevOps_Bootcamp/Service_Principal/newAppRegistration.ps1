@@ -1,4 +1,4 @@
-function newAppRegsitration {
+function newAppRegistration {
     
     param(
         [string]$name = "cloudskills",
