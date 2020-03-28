@@ -4,7 +4,7 @@ function servicePrinicpalKeyvault {
         [string]$name = "sp-keyvault-cloudskills",
         [string]$resourceGroup = "Dev10",
         [string]$location = "eastus2",
-        [string]$clientID = ""
+        [string]$clientID = "9584c463-ef10-4a4b-9637-0f22e5bfaf02"
     )
 
     try {
