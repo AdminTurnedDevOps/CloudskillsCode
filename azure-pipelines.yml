@@ -1,3 +1,8 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
 trigger:
 - master
 
@@ -5,39 +10,21 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: 'CloudSkills_DevOps_Bootcamp/AKS_Cluster'
-      Contents: '**'
-      TargetFolder: '$(Build.ArtifactStagingDirectory)'
+- task: TerraformTaskV1@0
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    workingDirectory: 'WebApp-Terraform'
+    backendServiceArm: 'Mike-Pay-As-You-Go (220284d2-6a19-4781-87f8-5c564ec4fec9)'
+    backendAzureRmResourceGroupName: 'dev2'
+    backendAzureRmStorageAccountName: 'storemfwmw3heqnyuk'
+    backendAzureRmContainerName: 'testcontainer'
+    backendAzureRmKey: 'tf/terraform.tfstate'
 
-  - task: PublishBuildArtifacts@1
-    inputs:
-      ArtifactName: 'drop'
-
-  - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
-    displayName: 'Install Terraform 0.12.13'
-
-  - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
-    displayName: 'Terraform : init'
-    inputs:
-      backendServiceArm: '$(subscription)'
-      workingDirectory: '$(Build.ArtifactStagingDirectory)'
-      backendAzureRmResourceGroupName: '$(resourceGroup)'
-      backendAzureRmStorageAccountName: '$(storageAccount)'
-      backendAzureRmContainerName: '$(containerName)'
-      backendAzureRmKey: tf/terraform.tfstate
-
-  - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
-    displayName: 'Terraform : plan'
-    inputs:
-      command: plan
-      workingDirectory: '$(Build.ArtifactStagingDirectory)'
-      environmentServiceNameAzureRM: '$(subscription)'
-      
-  - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
-    displayName: 'Terraform : apply'
-    inputs:
-      command: apply
-      workingDirectory: '$(Build.ArtifactStagingDirectory)'
-      environmentServiceNameAzureRM: '$(subscription)'
+- task: TerraformTaskV1@0
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    workingDirectory: 'WebApp-Terraform'
+    commandOptions: '-var="location=eastus" -var="RG=Dev2" -var="name=cloudskillsweb"'
+    environmentServiceNameAzureRM: 'Mike-Pay-As-You-Go (220284d2-6a19-4781-87f8-5c564ec4fec9)'
