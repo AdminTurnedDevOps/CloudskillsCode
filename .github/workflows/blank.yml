@@ -30,5 +30,5 @@ jobs:
         # Name of an existing slot other than the production slot. Default value is production
         slot-name: production
         # Application settings using the JSON syntax set as value of secret variable: APP_SETTINGS
-        connection-strings-json: ${{ secrets.CONNECTION_STRING }}
+        connection-strings-json: '${{ secrets.CONNECTION_STRING }}'
 
