@@ -1,0 +1,26 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: AzureAppServiceSettings@1
+  inputs:
+    azureSubscription: 'Mike-Pay-As-You-Go (220284d2-6a19-4781-87f8-5c564ec4fec9)'
+    appName: 'cloudskillswebapp92'
+    resourceGroupName: 'az-400'
+    connectionStrings: |
+      [
+              {
+                "name": "MysqlCredentials",
+                "value": "Server=myServerAddress;Database=myDataBase;Trusted_Connection=True;",
+                "type": "MySql",
+                "slotSetting": false
+              }
+            ]
