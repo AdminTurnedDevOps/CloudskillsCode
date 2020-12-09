@@ -1,3 +1,4 @@
+# Create a k8s cluster using Azure CLI
 az aks create --resource-group your_resource_group_name `
               --name cloudskillsaks92 `
               --node-count 2 `
